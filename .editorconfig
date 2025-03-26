@@ -1,0 +1,11 @@
+[*.{kt,kts}]
+ktlint_code_style = android_studio
+max_line_length = 150
+ij_kotlin_allow_trailing_comma = true
+ij_kotlin_allow_trailing_comma_on_call_site = true
+ktlint_function_naming_ignore_when_annotated_with = Composable
+ktlint_experimental = disabled
+ktlint_standard_property-naming = disabled
+ktlint_standard_class-naming = disabled
+ktlint_standard_function-expression-body = disabled
+ktlint_standard_class-signature = disabled
