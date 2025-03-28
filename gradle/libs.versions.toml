@@ -12,11 +12,48 @@ lifecycleLivedataKtx = "2.6.1"
 lifecycleViewmodelKtx = "2.6.1"
 navigationFragmentKtx = "2.6.0"
 navigationUiKtx = "2.6.0"
+rxJava = "2.2.21"
+rxKotlin = "2.4.0"
+rxAndroid = "2.1.1"
+kotlinCoroutinesAndroid = "1.9.0"
+koin = "3.5.3"
 swiperefreshlayout = "1.1.0"
+mockk = "1.13.10"
+mockitoAndroid = "5.11.0"
+mockitoCore = "5.11.0"
+coroutinesTest = "1.9.0"
+okhttp = "5.0.0-alpha.12"
+adapterRxjava = "2.9.0"
+androidTimesSquareup = "1.7.11"
+retrofit = "2.9.0"
+moshi = "1.15.1"
+coil = "3.1.0"
 
 [libraries]
+coil = { group = "io.coil-kt.coil3", name = "coil", version.ref = "coil" }
+coil-networking = { group = "io.coil-kt.coil3", name = "coil-network-okhttp", version.ref = "coil" }
+reactivex-rxjava = { group = "io.reactivex.rxjava2", name = "rxjava", version.ref = "rxJava" }
+reactivex-rxkotlin = { group = "io.reactivex.rxjava2", name = "rxkotlin", version.ref = "rxKotlin" }
+reactivex-rxandroid = { group = "io.reactivex.rxjava2", name = "rxandroid", version.ref = "rxAndroid" }
+kotlin-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinCoroutinesAndroid" }
+kotlin-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinCoroutinesAndroid" }
+koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin" }
+koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
 androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+test-mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
+test-mockk-android = { group = "io.mockk", name = "mockk-android", version.ref = "mockk" }
+test-mockito-android = { group = "org.mockito", name = "mockito-android", version.ref = "mockitoAndroid" }
+test-mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mockitoCore" }
+test-coroutines-testing = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutinesTest" }
+squareup-okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
+squareup-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
+squareup-adapter-rxjava = { group = "com.squareup.retrofit2", name = "adapter-rxjava2", version.ref = "adapterRxjava" }
+squareup-android-times-square = { group = "com.squareup", name = "android-times-square", version.ref = "androidTimesSquareup" }
+squareup-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+squareup-converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
+squareup-rest-json-converter = { group = "com.squareup.retrofit2", name = "converter-moshi", version.ref = "retrofit" }
+squareup-json = { group = "com.squareup.moshi", name = "moshi-kotlin", version.ref = "moshi" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }

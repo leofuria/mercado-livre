@@ -22,7 +22,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
@@ -43,6 +43,15 @@ android {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 
+    implementation(libs.coil)
+    implementation(libs.coil.networking)
+    implementation(libs.reactivex.rxjava)
+    implementation(libs.reactivex.rxandroid)
+    implementation(libs.reactivex.rxkotlin)
+    implementation(libs.kotlin.coroutines.android)
+    api(libs.kotlin.coroutines.core)
+    implementation(libs.koin.core)
+    implementation(libs.koin.android)
     implementation(libs.androidx.swiperefreshlayout)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -52,7 +61,19 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.squareup.retrofit)
+    implementation(libs.squareup.converter.gson)
+    implementation(libs.squareup.okhttp)
+    implementation(libs.squareup.logging.interceptor)
+    implementation(libs.squareup.adapter.rxjava)
+    implementation(libs.squareup.json)
+    implementation(libs.squareup.rest.json.converter)
     testImplementation(libs.junit)
+    testImplementation(libs.test.mockk)
+    testImplementation(libs.test.mockito.android)
+    implementation(libs.test.mockito.core)
+    testImplementation(libs.test.coroutines.testing)
+    androidTestImplementation(libs.test.mockk.android)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }
