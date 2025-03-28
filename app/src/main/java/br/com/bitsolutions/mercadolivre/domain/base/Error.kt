@@ -1,0 +1,12 @@
+package br.com.bitsolutions.mercadolivre.domain.base
+
+enum class Error {
+    GENERIC_ERROR,
+    GENERIC_ERROR_ON_PARSE,
+    INVALID_LOGIN,
+    INACTIVE_ACCOUNT,
+    POST_CANCELLATION_INTERNAL_ERROR,
+    GENERIC_ERROR_EXTRACT_HTTP_EXCEPTION,
+    UNKNOWN_HOST,
+    SSL_HANDSHAKE,
+}
