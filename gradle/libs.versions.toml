@@ -19,15 +19,16 @@ kotlinCoroutinesAndroid = "1.9.0"
 koin = "3.5.3"
 swiperefreshlayout = "1.1.0"
 mockk = "1.13.10"
-mockitoAndroid = "5.11.0"
-mockitoCore = "5.11.0"
+mockitoAndroid = "4.0.0"
+mockitoInline = "4.8.1"
 coroutinesTest = "1.9.0"
 okhttp = "5.0.0-alpha.12"
 adapterRxjava = "2.9.0"
-androidTimesSquareup = "1.7.11"
 retrofit = "2.9.0"
 moshi = "1.15.1"
 coil = "3.1.0"
+turbine = "1.1.0"
+navigation = "2.8.3"
 
 [libraries]
 coil = { group = "io.coil-kt.coil3", name = "coil", version.ref = "coil" }
@@ -43,13 +44,13 @@ androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "s
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 test-mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 test-mockk-android = { group = "io.mockk", name = "mockk-android", version.ref = "mockk" }
-test-mockito-android = { group = "org.mockito", name = "mockito-android", version.ref = "mockitoAndroid" }
-test-mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mockitoCore" }
+test-mockito-android = { group = "org.mockito.kotlin", name = "mockito-kotlin", version.ref = "mockitoAndroid" }
+test-mockito-inline = { group = "org.mockito", name = "mockito-inline", version.ref = "mockitoInline" }
 test-coroutines-testing = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutinesTest" }
+test-turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
 squareup-okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
 squareup-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
 squareup-adapter-rxjava = { group = "com.squareup.retrofit2", name = "adapter-rxjava2", version.ref = "adapterRxjava" }
-squareup-android-times-square = { group = "com.squareup", name = "android-times-square", version.ref = "androidTimesSquareup" }
 squareup-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 squareup-converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
 squareup-rest-json-converter = { group = "com.squareup.retrofit2", name = "converter-moshi", version.ref = "retrofit" }
@@ -68,4 +69,5 @@ androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+navigation-safeargs = { id = "androidx.navigation.safeargs.kotlin", version.ref = "navigation" }
 

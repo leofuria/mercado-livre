@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.navigation.safeargs)
 }
 
 android {
@@ -34,10 +35,20 @@ android {
         jvmTarget = "11"
     }
     buildFeatures {
-        dataBinding = true
         viewBinding = true
         buildConfig = true
     }
+    testOptions {
+        unitTests { isIncludeAndroidResources = true }
+        unitTests.all { test ->
+            test.testLogging {
+                events("passed", "skipped", "failed", "standardOut", "standardError")
+                test.outputs.upToDateWhen { false }
+                showStandardStreams = true
+            }
+        }
+    }
+    testBuildType = "debug"
 }
 
 dependencies {
@@ -68,11 +79,13 @@ dependencies {
     implementation(libs.squareup.adapter.rxjava)
     implementation(libs.squareup.json)
     implementation(libs.squareup.rest.json.converter)
+
     testImplementation(libs.junit)
     testImplementation(libs.test.mockk)
     testImplementation(libs.test.mockito.android)
-    implementation(libs.test.mockito.core)
+    testImplementation(libs.test.mockito.inline)
     testImplementation(libs.test.coroutines.testing)
+    testImplementation(libs.test.turbine)
     androidTestImplementation(libs.test.mockk.android)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
