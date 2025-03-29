@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorPrimary"
+    tools:context=".SearchActivity">
+
+    <ImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginBottom="@dimen/spacing_8dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/mercado_livre_logo"
+        app:layout_constraintBottom_toTopOf="@+id/svSearch"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <SearchView
+        android:id="@+id/svSearch"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_16dp"
+        android:layout_marginTop="@dimen/spacing_16dp"
+        android:background="@color/bg_search"
+        android:iconifiedByDefault="false"
+        android:padding="4dp"
+        android:queryHint="@string/search_hint"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivLogo" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

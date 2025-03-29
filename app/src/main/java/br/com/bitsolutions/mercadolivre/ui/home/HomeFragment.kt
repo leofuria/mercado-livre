@@ -9,6 +9,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
+import br.com.bitsolutions.mercadolivre.MainActivity.Companion.QUERY
 import br.com.bitsolutions.mercadolivre.R
 import br.com.bitsolutions.mercadolivre.databinding.FragmentHomeBinding
 import br.com.bitsolutions.mercadolivre.domain.base.State
@@ -26,7 +27,7 @@ class HomeFragment : Fragment() {
 
     // This property is only valid between onCreateView and
     // onDestroyView.
-    private val binding get() = _binding!!
+    private val binding get() = _binding
 
     val viewModel by viewModel<HomeViewModel>()
     private lateinit var searchAdapter: SearchAdapter
@@ -36,7 +37,7 @@ class HomeFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        val root: View = binding?.root!!
 
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.CREATED) {
@@ -62,24 +63,28 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        queryText = activity?.intent?.getStringExtra(QUERY) ?: ""
+
         initAdapter()
         if (savedInstanceState != null) {
-            binding.pagedListRecyclerView.getRecyclerView().layoutManager?.onRestoreInstanceState(savedInstanceState.getParcelable("listState"))
+            binding?.pagedListRecyclerView?.getRecyclerView()?.layoutManager?.onRestoreInstanceState(savedInstanceState.getParcelable("listState"))
         }
 
-        viewModel.resultItems.let {
-            offset = (it.value as? State.Data)?.data?.offset ?: 0
-            queryText = (it.value as? State.Data)?.data?.query ?: ""
+        viewModel.resultItems.value.takeIf { it.isData() }?.let {
+            offset = (it as? State.Data)?.data?.offset ?: 0
+            queryText = (it as? State.Data)?.data?.query ?: ""
             searchAdapter.loadEnable = viewModel.hasNextPage.value
 
-            val itemsSize = (it.value as? State.Data)?.data?.items?.size ?: 0
+            val itemsSize = (it as? State.Data)?.data?.items?.size ?: 0
             if (itemsSize <= 0) {
-                binding.pagedListRecyclerView.showFeedbackStatus(
+                binding?.pagedListRecyclerView?.showFeedbackStatus(
                     imageResource = R.drawable.ic_search_black_24dp,
                     feedbackTitle = R.string.paged_list_search_title,
                     feedbackMessage = R.string.paged_list_search_description,
                 )
             }
+        } ?: run {
+            searchResultItems(queryText)
         }
     }
 
@@ -92,11 +97,11 @@ class HomeFragment : Fragment() {
     }
 
     private fun onSuccessFetchItems(data: SearchResult?) {
-        binding.pagedListRecyclerView.isRefreshing = false
+        binding?.pagedListRecyclerView?.isRefreshing = false
         data?.offset?.let { offset = it }
 
         if (data?.items?.isEmpty() == true) {
-            binding.pagedListRecyclerView.showFeedbackStatus(
+            binding?.pagedListRecyclerView?.showFeedbackStatus(
                 imageResource = R.drawable.ic_search_black_24dp,
                 feedbackTitle = R.string.paged_list_search_not_found_title,
                 feedbackMessage = R.string.paged_list_search_not_found_description,
@@ -109,13 +114,13 @@ class HomeFragment : Fragment() {
     private fun onError(error: State.Error?) {
         if (error == null) return
 
-        binding.pagedListRecyclerView.isRefreshing = false
+        binding?.pagedListRecyclerView?.isRefreshing = false
         if (searchAdapter.itemCount <= 0) {
-            binding.pagedListRecyclerView.showFeedbackStatus(
+            binding?.pagedListRecyclerView?.showFeedbackStatus(
                 feedbackTitle = R.string.paged_list_generic_error,
                 feedbackMessage = R.string.paged_list_verify_connection_label,
                 action = {
-                    binding.pagedListRecyclerView.takeUnless { it.isRefreshing }?.isRefreshing = true
+                    binding?.pagedListRecyclerView.takeUnless { it?.isRefreshing == true }?.isRefreshing = true
                     viewModel.getSearchResult("MLB", queryText, offset)
                 },
             )
@@ -126,9 +131,9 @@ class HomeFragment : Fragment() {
 
     private fun initAdapter() {
         searchAdapter = SearchAdapter()
-        binding.pagedListRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        binding.pagedListRecyclerView.getRecyclerView().setHasFixedSize(true)
-        binding.pagedListRecyclerView.adapter = this.searchAdapter
+        binding?.pagedListRecyclerView?.layoutManager = LinearLayoutManager(requireContext())
+        binding?.pagedListRecyclerView?.getRecyclerView()?.setHasFixedSize(true)
+        binding?.pagedListRecyclerView?.adapter = this.searchAdapter
 
         searchAdapter.loadMoreListener = object : PagedListAdapter.ILoadMoreListener {
             override fun onLoadMore() {
@@ -136,7 +141,7 @@ class HomeFragment : Fragment() {
             }
         }
 
-        binding.pagedListRecyclerView.setOnRefreshListener {
+        binding?.pagedListRecyclerView?.setOnRefreshListener {
             offset = 0
             viewModel.getSearchResult("MLB", queryText, offset)
         }
@@ -153,14 +158,14 @@ class HomeFragment : Fragment() {
     fun searchResultItems(text: String) {
         queryText = text
         offset = 0
-        binding.pagedListRecyclerView.takeUnless { it.isRefreshing }?.isRefreshing = true
+        binding?.pagedListRecyclerView.takeUnless { it?.isRefreshing == true }?.isRefreshing = true
         viewModel.getSearchResult("MLB", text, offset)
     }
 
     @Override
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putParcelable("listState", binding.pagedListRecyclerView.getRecyclerView().layoutManager?.onSaveInstanceState())
+        outState.putParcelable("listState", binding?.pagedListRecyclerView?.getRecyclerView()?.layoutManager?.onSaveInstanceState())
     }
 
     override fun onDestroyView() {

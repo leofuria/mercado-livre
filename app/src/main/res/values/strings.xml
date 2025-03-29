@@ -2,18 +2,20 @@
     <string name="app_name">Mercado Livre</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="search_title">Search</string>
+    <string name="title_settings">Configurações</string>
+    <string name="search_title">Busca</string>
+    <string name="search_hint">Buscar no Mercado Livre</string>
+    <string name="search_toast_message">Digite ao menos 3 caracteres para efetuar a busca!</string>
 
     <!--ERROR LAYOUT-->
-    <string name="paged_list_generic_error">Sorry, an error occurred</string>
+    <string name="paged_list_generic_error">Desculpe, ocorreu um erro</string>
     <string name="paged_list_desc_error_image">Error icon</string>
-    <string name="paged_list_try_again_label">Try again</string>
-    <string name="paged_list_verify_connection_label">Check your internet connection and try again</string>
+    <string name="paged_list_try_again_label">Tentar novamente</string>
+    <string name="paged_list_verify_connection_label">Verifique sua conexão com a internet e tente novamente.</string>
 
-    <string name="paged_list_search_title">Search</string>
-    <string name="paged_list_search_description">Perform a search to display results here.</string>
+    <string name="paged_list_search_title">@string/search_title</string>
+    <string name="paged_list_search_description">Faça uma busca para mostrar os resultados.</string>
 
-    <string name="paged_list_search_not_found_title">Not found</string>
-    <string name="paged_list_search_not_found_description">No results found matching search terms.</string>
+    <string name="paged_list_search_not_found_title">Sem resultados</string>
+    <string name="paged_list_search_not_found_description">Nenhum resultado encontrado com os termos buscados.</string>
 </resources>

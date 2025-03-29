@@ -27,7 +27,7 @@ class HomeViewModel(
     fun getSearchResult(siteId: String, query: String, offset: Int) {
         viewModelScope.launch {
             val mOffset = if (hasNextPage.value) offset + limit else offset
-            if (offset == 0) cList = emptyList()
+            if (hasNextPage.value == false) cList = emptyList()
 
             searchUseCase.execute(siteId, query, mOffset, limit)
                 .map { event ->
