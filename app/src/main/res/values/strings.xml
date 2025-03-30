@@ -6,6 +6,9 @@
     <string name="search_title">Busca</string>
     <string name="search_hint">Buscar no Mercado Livre</string>
     <string name="search_toast_message">Digite ao menos 3 caracteres para efetuar a busca!</string>
+    <string name="detail_attributes_label">Características</string>
+    <string name="condition_new">Novo</string>
+    <string name="condition_used">Usado</string>
 
     <!--ERROR LAYOUT-->
     <string name="paged_list_generic_error">Desculpe, ocorreu um erro</string>
