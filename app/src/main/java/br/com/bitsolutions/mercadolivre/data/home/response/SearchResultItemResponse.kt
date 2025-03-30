@@ -15,30 +15,34 @@ data class SearchResultItemResponse(
     val currency: String,
     @SerializedName("original_price")
     val originalPrice: Double?,
+    @SerializedName("base_price")
+    val basePrice: Double?,
     val installments: SearchItemPriceInstallmentsResponse?,
     val shipping: SearchItemShippingResponse,
     val officialStore: String?,
     val permalink: String,
     val attributes: List<SearchItemAttributeResponse>,
-    val seller: SearchItemSellerResponse,
+    val seller: SearchItemSellerResponse?,
+    val pictures: List<SearchResultItemPictures>?,
 ) {
     fun toSearchResultItem(): SearchResultItem = SearchResultItem(
         id,
         title,
-        thumbnail.replace("http://", "https://"),
+        thumbnail,
         condition,
         SearchItemPrice(
             price,
-            originalPrice,
+            originalPrice ?: basePrice,
             currency,
             price.toBigDecimal().formatMoney(currencyCode = currency),
-            originalPrice?.toBigDecimal()?.formatMoney(2, currency) ?: "",
+            originalPrice?.toBigDecimal()?.formatMoney(2, currency) ?: (basePrice?.toBigDecimal()?.formatMoney(2, currency) ?: ""),
             installments?.toSearchItemPriceInstallments(),
         ),
         shipping.freeShipping,
         officialStore,
         permalink,
         attributes.map { it.toSearchItemAttribute() },
-        seller.nickname,
+        seller?.nickname ?: "",
+        pictures?.map { it.url },
     )
 }

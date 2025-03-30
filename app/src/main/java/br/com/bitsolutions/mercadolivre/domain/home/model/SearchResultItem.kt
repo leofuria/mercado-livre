@@ -13,4 +13,5 @@ data class SearchResultItem(
     val permalink: String,
     val attributes: List<SearchItemAttribute>,
     val seller: String,
+    val pictures: List<String>?,
 ) : Serializable
