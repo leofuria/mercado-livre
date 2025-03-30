@@ -14,6 +14,7 @@ import br.com.bitsolutions.mercadolivre.R
 import br.com.bitsolutions.mercadolivre.databinding.FragmentHomeBinding
 import br.com.bitsolutions.mercadolivre.domain.base.State
 import br.com.bitsolutions.mercadolivre.domain.home.model.SearchResult
+import br.com.bitsolutions.mercadolivre.ui.detail.DetailActivity
 import br.com.bitsolutions.pagedlist.adapter.PagedListAdapter
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
@@ -90,9 +91,9 @@ class HomeFragment : Fragment() {
 
     fun onLoading(loading: Boolean?) {
         if (loading == true) {
-//            showProgress()
+            binding?.loadingView?.visibility = View.VISIBLE
         } else {
-//            hideProgress()
+            binding?.loadingView?.visibility = View.GONE
         }
     }
 
@@ -148,8 +149,8 @@ class HomeFragment : Fragment() {
 
         searchAdapter.apply {
             getNotifyItemClick().subscribe {
-                // TODO: Call detail
                 val item = it.second
+                DetailActivity.launch(requireActivity(), item.id, item.seller, item.price.installments)
             }.addTo(disposables)
         }
         searchAdapter.hasFooter = true
@@ -158,7 +159,7 @@ class HomeFragment : Fragment() {
     fun searchResultItems(text: String) {
         queryText = text
         offset = 0
-        binding?.pagedListRecyclerView.takeUnless { it?.isRefreshing == true }?.isRefreshing = true
+        binding?.pagedListRecyclerView.takeUnless { it?.isRefreshing == true }?.isRefreshing = false
         viewModel.getSearchResult("MLB", text, offset)
     }
 

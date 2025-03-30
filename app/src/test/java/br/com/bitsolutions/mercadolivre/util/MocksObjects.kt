@@ -47,6 +47,7 @@ object MocksObjects {
                 permalink = "",
                 attributes = listOf(),
                 seller = "",
+                pictures = null,
             ),
         ),
         query = "",
