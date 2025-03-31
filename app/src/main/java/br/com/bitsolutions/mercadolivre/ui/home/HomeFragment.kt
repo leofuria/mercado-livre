@@ -14,7 +14,9 @@ import br.com.bitsolutions.mercadolivre.R
 import br.com.bitsolutions.mercadolivre.databinding.FragmentHomeBinding
 import br.com.bitsolutions.mercadolivre.domain.base.State
 import br.com.bitsolutions.mercadolivre.domain.home.model.SearchResult
+import br.com.bitsolutions.mercadolivre.domain.home.model.SearchResultItem
 import br.com.bitsolutions.mercadolivre.ui.detail.DetailActivity
+import br.com.bitsolutions.mercadolivre.ui.favorite.FavoriteViewModel
 import br.com.bitsolutions.pagedlist.adapter.PagedListAdapter
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
@@ -31,6 +33,7 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding
 
     val viewModel by viewModel<HomeViewModel>()
+    val favoriteViewModel by viewModel<FavoriteViewModel>()
     private lateinit var searchAdapter: SearchAdapter
     protected val disposables = CompositeDisposable()
     var queryText = ""
@@ -122,7 +125,12 @@ class HomeFragment : Fragment() {
                 feedbackMessage = R.string.paged_list_verify_connection_label,
                 action = {
                     binding?.pagedListRecyclerView.takeUnless { it?.isRefreshing == true }?.isRefreshing = true
-                    viewModel.getSearchResult("MLB", queryText, offset)
+                    viewModel.getSearchResult(
+                        "MLB",
+                        queryText,
+                        offset,
+                        String(resources.openRawResource(R.raw.response_success_for_get_search_results).readBytes()),
+                    )
                 },
             )
         } else {
@@ -131,20 +139,32 @@ class HomeFragment : Fragment() {
     }
 
     private fun initAdapter() {
-        searchAdapter = SearchAdapter()
+        searchAdapter = SearchAdapter { position, item ->
+            changeFavoriteStatus(position, item)
+        }
         binding?.pagedListRecyclerView?.layoutManager = LinearLayoutManager(requireContext())
         binding?.pagedListRecyclerView?.getRecyclerView()?.setHasFixedSize(true)
         binding?.pagedListRecyclerView?.adapter = this.searchAdapter
 
         searchAdapter.loadMoreListener = object : PagedListAdapter.ILoadMoreListener {
             override fun onLoadMore() {
-                viewModel.getSearchResult("MLB", queryText, offset)
+                viewModel.getSearchResult(
+                    "MLB",
+                    queryText,
+                    offset,
+                    String(resources.openRawResource(R.raw.response_success_for_get_search_results).readBytes()),
+                )
             }
         }
 
         binding?.pagedListRecyclerView?.setOnRefreshListener {
             offset = 0
-            viewModel.getSearchResult("MLB", queryText, offset)
+            viewModel.getSearchResult(
+                "MLB",
+                queryText,
+                offset,
+                String(resources.openRawResource(R.raw.response_success_for_get_search_results).readBytes()),
+            )
         }
 
         searchAdapter.apply {
@@ -156,11 +176,22 @@ class HomeFragment : Fragment() {
         searchAdapter.hasFooter = true
     }
 
+    private fun changeFavoriteStatus(position: Int, item: SearchResultItem) {
+        if (item.isFavorite == true) {
+            favoriteViewModel.deleteItem(item)
+            searchAdapter.getItem(position).isFavorite = false
+        } else {
+            favoriteViewModel.insertItem(item)
+            searchAdapter.getItem(position).isFavorite = true
+        }
+        binding?.pagedListRecyclerView?.getRecyclerView()?.adapter?.notifyItemChanged(position)
+    }
+
     fun searchResultItems(text: String) {
         queryText = text
         offset = 0
         binding?.pagedListRecyclerView.takeUnless { it?.isRefreshing == true }?.isRefreshing = false
-        viewModel.getSearchResult("MLB", text, offset)
+        viewModel.getSearchResult("MLB", text, offset, String(resources.openRawResource(R.raw.response_success_for_get_search_results).readBytes()))
     }
 
     @Override

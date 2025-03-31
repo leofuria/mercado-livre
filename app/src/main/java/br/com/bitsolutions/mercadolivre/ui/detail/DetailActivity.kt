@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Paint
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.OnBackPressedCallback
@@ -66,6 +67,14 @@ class DetailActivity : AppCompatActivity() {
         viewModel.getProductItem(itemId ?: "")
     }
 
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
+        super.onRestoreInstanceState(savedInstanceState, persistentState)
+
+        if (savedInstanceState != null) {
+            binding.rvResultAttributes.layoutManager?.onRestoreInstanceState(savedInstanceState.getParcelable("listState"))
+        }
+    }
+
     fun onLoading(loading: Boolean?) {
         binding.errorView.visibility = View.GONE
         if (loading == true) {
@@ -93,6 +102,11 @@ class DetailActivity : AppCompatActivity() {
             binding.tvResultPrice.text = item.price.formatedAmount
             installments?.let {
                 binding.tvResultInstallments.text = String.format("${it.quantity}x ${it.formatedAmount}")
+            }
+            binding.tvResultFreeShipping.visibility = if (item.freeShipping) {
+                View.VISIBLE
+            } else {
+                View.GONE
             }
             binding.rvResultAttributes.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
             if (item.attributes.isNotEmpty()) {
@@ -132,6 +146,12 @@ class DetailActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    @Override
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putParcelable("listState", binding.rvResultAttributes.layoutManager?.onSaveInstanceState())
     }
 
     companion object {

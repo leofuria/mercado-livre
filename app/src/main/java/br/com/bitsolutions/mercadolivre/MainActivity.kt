@@ -34,8 +34,8 @@ class MainActivity : AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.navigation_home,
-                R.id.navigation_dashboard,
-                R.id.navigation_settings,
+                R.id.navigation_favorite,
+                R.id.navigation_notifications,
             ),
         )
 
@@ -69,6 +69,8 @@ class MainActivity : AppCompatActivity() {
                 return false
             }
         })
+
+        mMenu?.findItem(R.id.search_bar)?.isVisible = navController.currentDestination?.id == R.id.navigation_home
 
         if (navController.currentDestination?.id == R.id.navigation_home) {
             val navHostFragment = supportFragmentManager.fragments.first().childFragmentManager.fragments

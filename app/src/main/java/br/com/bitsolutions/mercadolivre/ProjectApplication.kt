@@ -2,8 +2,10 @@ package br.com.bitsolutions.mercadolivre
 
 import android.app.Application
 import android.content.Context
+import br.com.bitsolutions.mercadolivre.di.databaseModule
 import br.com.bitsolutions.mercadolivre.di.networkModule
 import br.com.bitsolutions.mercadolivre.ui.detail.detailModule
+import br.com.bitsolutions.mercadolivre.ui.favorite.favoriteModule
 import br.com.bitsolutions.mercadolivre.ui.home.homeModule
 import coil3.ImageLoader
 import coil3.SingletonImageLoader
@@ -24,8 +26,10 @@ class ProjectApplication : Application(), SingletonImageLoader.Factory {
             modules(
                 listOf(
                     networkModule,
+                    databaseModule,
                     homeModule,
                     detailModule,
+                    favoriteModule,
                 ),
             )
         }

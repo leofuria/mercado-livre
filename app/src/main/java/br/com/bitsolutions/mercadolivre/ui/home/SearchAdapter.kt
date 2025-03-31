@@ -6,7 +6,9 @@ import br.com.bitsolutions.mercadolivre.domain.home.model.SearchResultItem
 import br.com.bitsolutions.pagedlist.adapter.PagedListAdapter
 import io.reactivex.rxkotlin.addTo
 
-class SearchAdapter : PagedListAdapter<SearchResultItem, SearchViewHolder>(DiffCallback) {
+class SearchAdapter(
+    private val onFavoriteItemClick: (Int, SearchResultItem) -> Unit,
+) : PagedListAdapter<SearchResultItem, SearchViewHolder>(DiffCallback) {
 
     companion object {
         val DiffCallback = object : DiffUtil.ItemCallback<SearchResultItem>() {
@@ -25,7 +27,7 @@ class SearchAdapter : PagedListAdapter<SearchResultItem, SearchViewHolder>(DiffC
     }
 
     override fun createItemView(parent: ViewGroup): SearchViewHolder {
-        return SearchViewHolder.create(parent).apply {
+        return SearchViewHolder.create(parent, onFavoriteItemClick).apply {
             getNotifyItemClickViewHolder().subscribe {
                 notifyItemClick.onNext(Pair(adapterPosition, it))
             }.addTo(disposable)

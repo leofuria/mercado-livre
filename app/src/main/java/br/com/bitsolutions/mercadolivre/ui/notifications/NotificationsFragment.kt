@@ -1,33 +1,33 @@
-package br.com.bitsolutions.mercadolivre.ui.settings
+package br.com.bitsolutions.mercadolivre.ui.notifications
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatDelegate
+import android.widget.TextView
 import androidx.fragment.app.Fragment
-import br.com.bitsolutions.mercadolivre.databinding.FragmentSettingsBinding
+import androidx.lifecycle.ViewModelProvider
+import br.com.bitsolutions.mercadolivre.databinding.FragmentNotificationsBinding
 
-class SettingsFragment : Fragment() {
+class NotificationsFragment : Fragment() {
 
-    private var _binding: FragmentSettingsBinding? = null
+    private var _binding: FragmentNotificationsBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding = FragmentSettingsBinding.inflate(inflater, container, false)
+        val notificationsViewModel =
+            ViewModelProvider(this).get(NotificationsViewModel::class.java)
+
+        _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        binding.switchDarkMode.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            } else {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            }
+        val textView: TextView = binding.textNotifications
+        notificationsViewModel.text.observe(viewLifecycleOwner) {
+            textView.text = it
         }
-
         return root
     }
 
