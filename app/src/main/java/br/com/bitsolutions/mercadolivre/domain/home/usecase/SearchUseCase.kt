@@ -10,14 +10,14 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
 
 class SearchUseCase(private val repository: SearchRepository) {
-    fun execute(siteId: String, query: String, offset: Int, limit: Int): Flow<State<SearchResult>> {
-        return getSearchResult(siteId, query, offset, limit).onStart {
+    fun execute(siteId: String, query: String, offset: Int, limit: Int, fileString: String?): Flow<State<SearchResult>> {
+        return getSearchResult(siteId, query, offset, limit, fileString).onStart {
             emit(State.loading())
         }
     }
 
-    private fun getSearchResult(siteId: String, query: String, offset: Int, limit: Int): Flow<State<SearchResult>> {
-        return repository.getSearchResult(siteId, query, offset, limit)
+    private fun getSearchResult(siteId: String, query: String, offset: Int, limit: Int, fileString: String?): Flow<State<SearchResult>> {
+        return repository.getSearchResult(siteId, query, offset, limit, fileString)
             .map { State.data(it) }
             .catch { throwable ->
                 emit(

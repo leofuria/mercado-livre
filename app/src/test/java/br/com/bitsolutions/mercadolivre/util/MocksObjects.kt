@@ -43,7 +43,6 @@ object MocksObjects {
                     installments = null,
                 ),
                 freeShipping = false,
-                officialStore = "",
                 permalink = "",
                 attributes = listOf(),
                 seller = "",

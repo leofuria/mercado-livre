@@ -32,18 +32,18 @@ class SearchRepositoryTest : BaseTest() {
     @Test
     fun `Should return search result`() = runTest {
         val flow = flow { emit(expectedSearchResults.toSearchResult()) }
-        Mockito.`when`(remoteToFlow.getSearchResult(SITE_ID, QUERY, OFFSET, LIMIT)).thenReturn(flow)
+        Mockito.`when`(remoteToFlow.getSearchResult(SITE_ID, QUERY, OFFSET, LIMIT, fileString)).thenReturn(flow)
 
-        val remoteResult = remoteToFlow.getSearchResult(SITE_ID, QUERY, OFFSET, LIMIT)
+        val remoteResult = remoteToFlow.getSearchResult(SITE_ID, QUERY, OFFSET, LIMIT, fileString)
         Mockito.`when`(
-            repositoryToFlow.getSearchResult(SITE_ID, QUERY, OFFSET, LIMIT),
+            repositoryToFlow.getSearchResult(SITE_ID, QUERY, OFFSET, LIMIT, fileString),
         ).thenReturn(remoteResult)
 
-        repositoryToFlow.getSearchResult(SITE_ID, QUERY, OFFSET, LIMIT)
+        repositoryToFlow.getSearchResult(SITE_ID, QUERY, OFFSET, LIMIT, fileString)
             .collect { result ->
                 assertEquals(result, expectedSearchResults.toSearchResult())
             }
-        Mockito.verify(repositoryToFlow).getSearchResult(SITE_ID, QUERY, OFFSET, LIMIT)
+        Mockito.verify(repositoryToFlow).getSearchResult(SITE_ID, QUERY, OFFSET, LIMIT, fileString)
     }
 
     @Test
@@ -51,16 +51,16 @@ class SearchRepositoryTest : BaseTest() {
         val expected: Flow<SearchResult> = flow {
             throw BaseThrowable()
         }
-        Mockito.`when`(remoteToFlow.getSearchResult(SITE_ID, QUERY, OFFSET, LIMIT)).thenReturn(expected)
-        val remoteResult = remoteToFlow.getSearchResult(SITE_ID, QUERY, OFFSET, LIMIT)
-        Mockito.`when`(repositoryToFlow.getSearchResult(SITE_ID, QUERY, OFFSET, LIMIT)).thenReturn(remoteResult)
+        Mockito.`when`(remoteToFlow.getSearchResult(SITE_ID, QUERY, OFFSET, LIMIT, fileString)).thenReturn(expected)
+        val remoteResult = remoteToFlow.getSearchResult(SITE_ID, QUERY, OFFSET, LIMIT, fileString)
+        Mockito.`when`(repositoryToFlow.getSearchResult(SITE_ID, QUERY, OFFSET, LIMIT, fileString)).thenReturn(remoteResult)
 
-        repositoryToFlow.getSearchResult(SITE_ID, QUERY, OFFSET, LIMIT)
+        repositoryToFlow.getSearchResult(SITE_ID, QUERY, OFFSET, LIMIT, fileString)
             .catch {
                 assertTrue(it is BaseThrowable)
             }
             .collect()
 
-        Mockito.verify(repositoryToFlow).getSearchResult(SITE_ID, QUERY, OFFSET, LIMIT)
+        Mockito.verify(repositoryToFlow).getSearchResult(SITE_ID, QUERY, OFFSET, LIMIT, fileString)
     }
 }

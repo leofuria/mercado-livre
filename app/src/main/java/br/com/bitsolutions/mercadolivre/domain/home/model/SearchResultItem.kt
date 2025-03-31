@@ -9,9 +9,9 @@ data class SearchResultItem(
     val condition: String,
     val price: SearchItemPrice,
     val freeShipping: Boolean,
-    val officialStore: String?,
     val permalink: String,
     val attributes: List<SearchItemAttribute>,
     val seller: String,
     val pictures: List<String>?,
+    var isFavorite: Boolean = false,
 ) : Serializable

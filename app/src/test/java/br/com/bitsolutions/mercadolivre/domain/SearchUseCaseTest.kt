@@ -36,9 +36,9 @@ class SearchUseCaseTest : BaseTest() {
     fun `Should return search result`() = runTest {
         val expectedFlow = flow { emit(expectedSearchResult) }
 
-        Mockito.`when`(repository.getSearchResult(SITE_ID, QUERY, OFFSET, LIMIT)).thenReturn(expectedFlow)
+        Mockito.`when`(repository.getSearchResult(SITE_ID, QUERY, OFFSET, LIMIT, fileString)).thenReturn(expectedFlow)
 
-        val result = useCase.execute(SITE_ID, QUERY, OFFSET, LIMIT).toList()
+        val result = useCase.execute(SITE_ID, QUERY, OFFSET, LIMIT, fileString).toList()
 
         Assert.assertEquals(State.Loading, result[0])
         Assert.assertTrue(result[1] is State.Data)
@@ -47,16 +47,16 @@ class SearchUseCaseTest : BaseTest() {
 
         Assert.assertEquals(1, data.items.size)
         Assert.assertEquals(expectedSearchResult, data)
-        Mockito.verify(repository).getSearchResult(SITE_ID, QUERY, OFFSET, LIMIT)
+        Mockito.verify(repository).getSearchResult(SITE_ID, QUERY, OFFSET, LIMIT, fileString)
     }
 
     @Test
     fun `Should FAIL search result request error`() = runTest {
         val expectedFlow = flow<SearchResult> { throw BaseThrowable() }
 
-        Mockito.`when`(repository.getSearchResult(SITE_ID, QUERY, OFFSET, LIMIT)).thenReturn(expectedFlow)
+        Mockito.`when`(repository.getSearchResult(SITE_ID, QUERY, OFFSET, LIMIT, fileString)).thenReturn(expectedFlow)
 
-        val result = useCase.execute(SITE_ID, QUERY, OFFSET, LIMIT).toList()
+        val result = useCase.execute(SITE_ID, QUERY, OFFSET, LIMIT, fileString).toList()
 
         Assert.assertEquals(State.Loading, result[0])
         Assert.assertTrue(result[1] is State.Error)
