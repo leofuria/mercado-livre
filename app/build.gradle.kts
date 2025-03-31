@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.navigation.safeargs)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -79,6 +80,9 @@ dependencies {
     implementation(libs.squareup.adapter.rxjava)
     implementation(libs.squareup.json)
     implementation(libs.squareup.rest.json.converter)
+    api(libs.room.ktx)
+    api(libs.room.runtime)
+    ksp(libs.room.compiler)
 
     testImplementation(libs.junit)
     testImplementation(libs.test.mockk)
