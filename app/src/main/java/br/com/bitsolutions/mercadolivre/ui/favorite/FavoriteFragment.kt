@@ -1,4 +1,4 @@
-package br.com.bitsolutions.mercadolivre.ui.dashboard
+package br.com.bitsolutions.mercadolivre.ui.favorite
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -17,11 +17,7 @@ class DashboardFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val dashboardViewModel =
             ViewModelProvider(this).get(DashboardViewModel::class.java)
 

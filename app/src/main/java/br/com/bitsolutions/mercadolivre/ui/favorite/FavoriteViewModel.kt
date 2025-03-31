@@ -1,4 +1,4 @@
-package br.com.bitsolutions.mercadolivre.ui.dashboard
+package br.com.bitsolutions.mercadolivre.ui.favorite
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
