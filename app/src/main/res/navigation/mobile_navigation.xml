@@ -12,14 +12,14 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="br.com.bitsolutions.mercadolivre.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_favorite"
+        android:name="br.com.bitsolutions.mercadolivre.ui.favorite.FavoriteFragment"
+        android:label="@string/title_favorite"
+        tools:layout="@layout/fragment_favorite" />
 
     <fragment
         android:id="@+id/navigation_settings"
-        android:name="br.com.bitsolutions.mercadolivre.ui.settings.SettingsFragment"
+        android:name="br.com.bitsolutions.mercadolivre.ui.notifications.SettingsFragment"
         android:label="@string/title_settings"
         tools:layout="@layout/fragment_settings" />
 </navigation>

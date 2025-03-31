@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Mercado Livre</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_favorite">Favoritos</string>
     <string name="title_settings">Configurações</string>
     <string name="search_title">Busca</string>
     <string name="search_hint">Buscar no Mercado Livre</string>
@@ -9,6 +9,9 @@
     <string name="detail_attributes_label">Características</string>
     <string name="condition_new">Novo</string>
     <string name="condition_used">Usado</string>
+    <string name="free_shipping">Frete grátis</string>
+    <string name="favorite_not_found_title">Você ainda não tem produtos favoritos</string>
+    <string name="favorite_not_found_description">Adicione-os por meio do coração na lista de produtos.</string>
 
     <!--ERROR LAYOUT-->
     <string name="paged_list_generic_error">Desculpe, ocorreu um erro</string>

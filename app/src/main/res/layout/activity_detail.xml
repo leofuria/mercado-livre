@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -106,6 +107,17 @@
             tools:text="em até 12x" />
 
         <TextView
+            android:id="@+id/tvResultFreeShipping"
+            style="@style/text_installments"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_8dp"
+            android:visibility="gone"
+            android:text="@string/free_shipping"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvResultInstallments" />
+
+        <TextView
             android:id="@+id/tvResultAttributesLabel"
             style="@style/text_detail_attributes_label"
             android:layout_width="0dp"
@@ -114,14 +126,13 @@
             android:text="@string/detail_attributes_label"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvResultInstallments" />
+            app:layout_constraintTop_toBottomOf="@+id/tvResultFreeShipping" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvResultAttributes"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_4dp"
-            android:nestedScrollingEnabled="false"
             android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@+id/tvResultAttributesLabel"
             tools:itemCount="3"

@@ -16,13 +16,22 @@
 
         <ImageView
             android:id="@+id/ivResultImage"
-            android:layout_width="0dp"
+            android:layout_width="150dp"
             android:layout_height="156dp"
             android:scaleType="fitCenter"
             android:src="@color/teal_700"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tvResultCondition"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/tvResultCondition" />
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivFavorite"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_margin="@dimen/spacing_4dp"
+            app:layout_constraintEnd_toEndOf="@+id/ivResultImage"
+            app:layout_constraintTop_toTopOf="@+id/tvResultCondition"
+            app:srcCompat="@drawable/ic_favorite_outline_black_24dp" />
 
         <TextView
             android:id="@+id/tvResultCondition"
@@ -30,9 +39,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_8dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ivResultImage"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivResultImage"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="Novo" />
 
         <TextView
@@ -43,9 +52,9 @@
             android:layout_marginStart="@dimen/spacing_8dp"
             android:ellipsize="end"
             android:maxLines="3"
-            app:layout_constraintTop_toBottomOf="@+id/tvResultCondition"
-            app:layout_constraintStart_toEndOf="@+id/ivResultImage"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivResultImage"
+            app:layout_constraintTop_toBottomOf="@+id/tvResultCondition"
             tools:text="Notebook" />
 
         <TextView
@@ -55,10 +64,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_8dp"
             android:layout_marginBottom="@dimen/spacing_16dp"
-            app:layout_constraintTop_toBottomOf="@+id/tvResultTitle"
-            app:layout_constraintStart_toEndOf="@+id/ivResultImage"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/tvResultOriginalPrice"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivResultImage"
+            app:layout_constraintTop_toBottomOf="@+id/tvResultTitle"
             tools:text="Apple" />
 
         <TextView
@@ -67,10 +76,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_8dp"
+            app:layout_constraintBottom_toTopOf="@+id/tvResultPrice"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ivResultImage"
             app:layout_constraintTop_toBottomOf="@+id/tvResultSelLer"
-            app:layout_constraintBottom_toTopOf="@+id/tvResultPrice"
             tools:text="A partir de R$12750" />
 
         <TextView
@@ -80,8 +89,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_8dp"
             app:layout_constraintBottom_toTopOf="@id/tvResultInstallments"
-            app:layout_constraintStart_toEndOf="@+id/ivResultImage"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivResultImage"
             app:layout_constraintTop_toBottomOf="@+id/tvResultOriginalPrice"
             tools:text="R$ 299" />
 
@@ -91,10 +100,23 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_8dp"
-            app:layout_constraintStart_toEndOf="@+id/ivResultImage"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivResultImage"
             app:layout_constraintTop_toBottomOf="@+id/tvResultPrice"
+            app:layout_constraintBottom_toTopOf="@+id/tvResultFreeShipping"
             tools:text="em até 12x" />
+
+        <TextView
+            android:id="@+id/tvResultFreeShipping"
+            style="@style/text_installments"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_8dp"
+            android:layout_marginTop="@dimen/spacing_8dp"
+            android:text="@string/free_shipping"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivResultImage"
+            app:layout_constraintTop_toBottomOf="@+id/tvResultInstallments" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
