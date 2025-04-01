@@ -22,6 +22,7 @@ object MocksObjects {
 
     fun <T> genericErrorResponse(): Response<T> = Response.error(500, "".toResponseBody("application/json; charset=utf-8".toMediaTypeOrNull()))
 
+    val fileString = UtilsTests.getJson("json/responseSuccessForGetSearchResults.json")
     val expectedSearchResults = Gson().fromJson(
         UtilsTests.getJson("json/responseSuccessForGetSearchResults.json"),
         SearchResultResponse::class.java,

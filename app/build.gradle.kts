@@ -17,6 +17,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "ACCESS_TOKEN", "\"${System.getenv("ACCESS_TOKEN")}\"")
     }
 
     buildTypes {

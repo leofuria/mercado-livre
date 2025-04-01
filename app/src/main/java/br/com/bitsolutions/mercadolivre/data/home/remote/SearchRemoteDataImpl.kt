@@ -14,15 +14,17 @@ class SearchRemoteDataImpl(
 ) : BaseRemoteData(), SearchRemoteData {
     override fun getSearchResult(siteId: String, query: String, offset: Int, limit: Int, fileString: String?): Flow<SearchResult> = flow {
         safeCall {
-//            val response = apiClient.getSearchResult(siteId, query, offset, limit)
-
-            // TODO foi preciso mockar o resultado da lista pois mesmo com access token a retorno vem 403
-            val response = Response.success(
-                Gson().fromJson(
-                    fileString,
-                    SearchResultResponse::class.java,
-                ),
-            )
+            val response = if (fileString.isNullOrBlank()) {
+                apiClient.getSearchResult(siteId, query, offset, limit)
+            } else {
+                // TODO foi preciso mockar o resultado da lista pois mesmo com access token a retorno vem 403
+                Response.success(
+                    Gson().fromJson(
+                        fileString,
+                        SearchResultResponse::class.java,
+                    ),
+                )
+            }
             threatResponse(response) {
                 emit(it.toSearchResult())
             }

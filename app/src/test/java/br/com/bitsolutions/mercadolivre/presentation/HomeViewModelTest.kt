@@ -12,6 +12,7 @@ import br.com.bitsolutions.mercadolivre.util.MocksObjects.OFFSET
 import br.com.bitsolutions.mercadolivre.util.MocksObjects.QUERY
 import br.com.bitsolutions.mercadolivre.util.MocksObjects.SITE_ID
 import br.com.bitsolutions.mercadolivre.util.MocksObjects.expectedSearchResults
+import br.com.bitsolutions.mercadolivre.util.MocksObjects.fileString
 import br.com.bitsolutions.mercadolivre.util.MocksObjects.genericErrorThrowable
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -56,11 +57,16 @@ class HomeViewModelTest : BaseTest() {
             flowOf(
                 State.Loading,
             ),
-        ).`when`(searchUseCase).execute(SITE_ID, QUERY, OFFSET, LIMIT)
+        ).`when`(searchUseCase).execute(SITE_ID, QUERY, OFFSET, LIMIT, fileString)
 
         turbineScope {
             homeViewModel.resultItems.test {
-                homeViewModel.getSearchResult(SITE_ID, QUERY, OFFSET)
+                homeViewModel.getSearchResult(
+                    SITE_ID,
+                    QUERY,
+                    OFFSET,
+                    fileString,
+                )
 
                 val turbine1 = flowOf(State.Idle).testIn(backgroundScope)
                 val turbine2 = flowOf(State.Loading).testIn(backgroundScope)
@@ -75,7 +81,7 @@ class HomeViewModelTest : BaseTest() {
             }
         }
 
-        verify(searchUseCase).execute(SITE_ID, QUERY, OFFSET, LIMIT)
+        verify(searchUseCase).execute(SITE_ID, QUERY, OFFSET, LIMIT, fileString)
     }
 
     @Test
@@ -84,11 +90,16 @@ class HomeViewModelTest : BaseTest() {
             flowOf(
                 State.data(expectedSearchResults.toSearchResult()),
             ),
-        ).`when`(searchUseCase).execute(SITE_ID, QUERY, OFFSET, LIMIT)
+        ).`when`(searchUseCase).execute(SITE_ID, QUERY, OFFSET, LIMIT, fileString)
 
         turbineScope {
             homeViewModel.resultItems.test {
-                homeViewModel.getSearchResult(SITE_ID, QUERY, OFFSET)
+                homeViewModel.getSearchResult(
+                    SITE_ID,
+                    QUERY,
+                    OFFSET,
+                    fileString,
+                )
 
                 val turbine1 = flowOf(State.Idle).testIn(backgroundScope)
                 val turbine2 = flowOf(State.Loading).testIn(backgroundScope)
@@ -106,7 +117,7 @@ class HomeViewModelTest : BaseTest() {
             }
         }
 
-        verify(searchUseCase).execute(SITE_ID, QUERY, OFFSET, LIMIT)
+        verify(searchUseCase).execute(SITE_ID, QUERY, OFFSET, LIMIT, fileString)
     }
 
     @Test
@@ -114,9 +125,14 @@ class HomeViewModelTest : BaseTest() {
         val error = State.error<Nothing>(genericErrorThrowable.type, genericErrorThrowable.cause)
         doReturn(
             flowOf(error),
-        ).`when`(searchUseCase).execute(SITE_ID, QUERY, OFFSET, LIMIT)
+        ).`when`(searchUseCase).execute(SITE_ID, QUERY, OFFSET, LIMIT, fileString)
 
-        homeViewModel.getSearchResult(SITE_ID, QUERY, OFFSET)
+        homeViewModel.getSearchResult(
+            SITE_ID,
+            QUERY,
+            OFFSET,
+            fileString,
+        )
 
         turbineScope {
             homeViewModel.resultItems.test {
@@ -136,6 +152,6 @@ class HomeViewModelTest : BaseTest() {
             }
         }
 
-        verify(searchUseCase).execute(SITE_ID, QUERY, OFFSET, LIMIT)
+        verify(searchUseCase).execute(SITE_ID, QUERY, OFFSET, LIMIT, fileString)
     }
 }

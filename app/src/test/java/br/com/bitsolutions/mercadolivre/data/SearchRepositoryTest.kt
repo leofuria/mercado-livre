@@ -10,6 +10,7 @@ import br.com.bitsolutions.mercadolivre.util.MocksObjects.OFFSET
 import br.com.bitsolutions.mercadolivre.util.MocksObjects.QUERY
 import br.com.bitsolutions.mercadolivre.util.MocksObjects.SITE_ID
 import br.com.bitsolutions.mercadolivre.util.MocksObjects.expectedSearchResults
+import br.com.bitsolutions.mercadolivre.util.MocksObjects.fileString
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect

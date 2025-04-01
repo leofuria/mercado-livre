@@ -35,7 +35,7 @@ class SearchRemoteDataTest : BaseTest() {
             clientToFlow.getSearchResult(SITE_ID, QUERY, OFFSET, LIMIT),
         ).thenReturn(expectedSearchResultsResponse)
 
-        remoteDataToFlow.getSearchResult(SITE_ID, QUERY, OFFSET, LIMIT, fileString).collect { result ->
+        remoteDataToFlow.getSearchResult(SITE_ID, QUERY, OFFSET, LIMIT, null).collect { result ->
             assertEquals(result, expectedSearchResultsResponse.body()?.toSearchResult())
         }
 
@@ -48,7 +48,7 @@ class SearchRemoteDataTest : BaseTest() {
             clientToFlow.getSearchResult(SITE_ID, QUERY, OFFSET, LIMIT),
         ).thenReturn(genericErrorResponse())
 
-        remoteDataToFlow.getSearchResult(SITE_ID, QUERY, OFFSET, LIMIT, fileString).catch {
+        remoteDataToFlow.getSearchResult(SITE_ID, QUERY, OFFSET, LIMIT, null).catch {
             assertEquals(it is BaseThrowable, true)
             assertEquals(it.cause is Exception, true)
         }.collect { }

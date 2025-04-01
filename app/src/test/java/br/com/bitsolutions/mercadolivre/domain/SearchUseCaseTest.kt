@@ -11,6 +11,7 @@ import br.com.bitsolutions.mercadolivre.util.MocksObjects.OFFSET
 import br.com.bitsolutions.mercadolivre.util.MocksObjects.QUERY
 import br.com.bitsolutions.mercadolivre.util.MocksObjects.SITE_ID
 import br.com.bitsolutions.mercadolivre.util.MocksObjects.expectedSearchResult
+import br.com.bitsolutions.mercadolivre.util.MocksObjects.fileString
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.test.runTest
