@@ -107,7 +107,7 @@ Entretanto, no fim da implementação, mesmo passando o ACCESS_TOKEN a busca ret
 ## 💄 Screenshots
 
 <p alinhar="centro">
-  <img src="screenshots/Screenshot_20250401_082144.png" largura="250">
-  <img src="screenshots/Screenshot_20250401_083353.png" largura="250">
-  <img src="screenshots/Screenshot_20250401_082909.png" largura="250">
+  <img src="screenshots/Screenshot_20250401_082144.png" width="250">
+  <img src="screenshots/Screenshot_20250401_083353.png" width="250">
+  <img src="screenshots/Screenshot_20250401_082909.png" width="250">
 </p>
